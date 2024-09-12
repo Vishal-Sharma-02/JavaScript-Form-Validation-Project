@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation Form</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .error {
+      color: red;
+    }
+    .btn-lg {
+      font-size: 1.25rem;
+      padding: .75rem 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="mt-5">Registration Form</h2>
+    <form id="registrationForm" novalidate>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <label for="username">First Name</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+        <div class="invalid-feedback">
+          enter first name.
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="username">Last Name</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+        <div class="invalid-feedback">
+          enter last name.
+        </div>
+      </div>
+</div>
+
+      
+      <div class="form-group">
+        <label for="email">Email ID</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+        <div class="invalid-feedback">
+          enter correct email.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="phone" class="form-control" id="phone" name="phone" required>
+        <div class="invalid-feedback">
+          enter valid phone number.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+        <div class="invalid-feedback">
+          password is not strong.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+        <div class="invalid-feedback">
+          Password don't match.
+        </div>
+      </div>
+       
+      <!-- Show Password Checkbox -->
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="showPassword">
+        <label class="form-check-label" for="showPassword">Show Password</label>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var form = document.getElementById('registrationForm');
+    
+      form.addEventListener('submit', function (event) {
+        var isValid = true;
+    
+        // Custom validation for username
+        var username = document.getElementById('username');
+        if (username.value.length < 5) {
+          username.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          username.classList.remove('is-invalid');
+          username.classList.add('is-valid');
+        }
+    
+        // Custom validation for email
+        var email = document.getElementById('email');
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email.value)) {
+          email.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          email.classList.remove('is-invalid');
+          email.classList.add('is-valid');
+        }
+
+        // Custom validation for phone number
+        var phone = document.getElementById('phone');
+        var phonePattern = /^[0-9]{10}$/;
+        if (phone.value === "123456789" || !phonePattern.test(phone.value)) {
+          phone.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          phone.classList.remove('is-invalid');
+          phone.classList.add('is-valid');
+        }
+    
+        // Custom validation for password
+        var password = document.getElementById('password');
+        if (password.value.length < 8) {
+          password.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          password.classList.remove('is-invalid');
+          password.classList.add('is-valid');
+        }
+
+        // Custom validation for confirm password
+        var confirmPassword = document.getElementById('confirmPassword');
+        if (confirmPassword.value !== password.value) {
+          confirmPassword.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          confirmPassword.classList.remove('is-invalid');
+          confirmPassword.classList.add('is-valid');
+        }
+    
+        if (!isValid) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+    
+        form.classList.add('was-validated');
+      }, false);
+
+    // Show/hide password functionality
+  document.getElementById('showPassword').addEventListener('change', function() {
+    var passwordField = document.getElementById('password');
+    var confirmPasswordField = document.getElementById('confirmPassword');
+    if (this.checked) {
+      passwordField.type = 'text';
+      confirmPasswordField.type = 'text';
+    } else {
+      passwordField.type = 'password';
+      confirmPasswordField.type = 'password';
+    }
+
+    });
+});
+    </script>
+    
+</body>
+</html>
